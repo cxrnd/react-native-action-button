@@ -49,17 +49,12 @@ const ActionButton = props => {
     }
   }, [props.resetToken, props.active]);
 
-  //////////////////////
-  // STYLESHEET GETTERS
-  //////////////////////
-
   const getOrientation = () => {
     return { alignItems: alignItemsMap[props.position] };
   };
 
   const getOffsetXY = () => {
     return {
-      // paddingHorizontal: props.offsetX,
       paddingVertical: props.offsetY
     };
   };
@@ -97,7 +92,10 @@ const ActionButton = props => {
     const wrapperStyle = {
       backgroundColor: anim.current.interpolate({
         inputRange: [0, 1],
-        outputRange: [props.buttonColor, props.btnOutRange || props.buttonColor]
+        outputRange: [
+          props.buttonColor, 
+          props.btnOutRange || props.buttonColor
+        ]
       }),
       width: props.size,
       height: props.size,
@@ -175,6 +173,7 @@ const ActionButton = props => {
     }
 
     const textColor = buttonTextStyle.color || "rgba(255,255,255,1)";
+    const outRangeTextColor = btnOutRangeTxt || textColor;
 
     return (
       <Animated.Text
@@ -184,7 +183,7 @@ const ActionButton = props => {
           {
             color: anim.current.interpolate({
               inputRange: [0, 1],
-              outputRange: [textColor, btnOutRangeTxt || textColor]
+              outputRange: [textColor, outRangeTextColor]
             })
           }
         ]}
@@ -208,7 +207,6 @@ const ActionButton = props => {
     const actionStyle = {
       flex: 1,
       alignSelf: "stretch",
-      // backgroundColor: 'purple',
       justifyContent: verticalOrientation === "up" ? "flex-end" : "flex-start",
       paddingTop: props.verticalOrientation === "down" ? props.spacing : 0,
       zIndex: props.zIndex
@@ -245,10 +243,6 @@ const ActionButton = props => {
       />
     );
   };
-
-  //////////////////////
-  // Animation Methods
-  //////////////////////
 
   const animateButton = (animate = true) => {
     if (active) return reset(animate);
@@ -410,4 +404,5 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent"
   }
 });
+
 export default ActionButton;
