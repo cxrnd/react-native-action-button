@@ -89,12 +89,14 @@ const ActionButton = props => {
       ]
     };
 
+    const buttonOutRangeColor = props.btnOutRange || props.buttonColor;
+
     const wrapperStyle = {
       backgroundColor: anim.current.interpolate({
         inputRange: [0, 1],
         outputRange: [
           props.buttonColor, 
-          props.btnOutRange || props.buttonColor
+          buttonOutRangeColor
         ]
       }),
       width: props.size,
